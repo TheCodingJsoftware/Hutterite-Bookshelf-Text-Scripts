@@ -1,12 +1,6 @@
-import os
-import tempfile
-import subprocess
-import codecs
+import pytesseract, os, glob, codecs, subprocess
 try: from PIL import Image
 except ImportError: import Image
-import pytesseract
-import os
-import glob
 from natsort import natsort_keygen
 natsort_key = natsort_keygen()
 
