@@ -1,4 +1,4 @@
-def replaceText(txtFile, wordList):
+def replace_text(txtFile, wordList='word_fixes.txt'):
     # This list contains all of the words you want to replace
     wordsToReplaceOld = []
     # This list contains all of the new words
