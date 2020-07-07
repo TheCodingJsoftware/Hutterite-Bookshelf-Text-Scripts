@@ -1,4 +1,12 @@
+import os
 def replace_text(txtFile, wordList='word_fixes.txt'):
+    """Replace text in file
+
+    Args:
+        txtFile (str): the file to want to replace text in
+        wordList (str, optional): List of words you want to replace and what to replace with. Defaults to 'word_fixes.txt'.
+    """
+    wordList = os.path.dirname(os.path.abspath(__file__)) + '/word_fixes.txt'
     # This list contains all of the words you want to replace
     wordsToReplaceOld = []
     # This list contains all of the new words

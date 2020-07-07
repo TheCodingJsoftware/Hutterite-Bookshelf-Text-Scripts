@@ -2,6 +2,11 @@ import os
 from natsort import natsort_keygen
 files = []
 def list_gen(directory):
+    """Directory to the list of files you want to make a list out of
+
+    Args:
+        directory (str): file name
+    """
     for file in os.listdir(directory):
         if file.endswith(".txt"):
             file = file.replace('.txt', '')
@@ -16,3 +21,5 @@ def list_gen(directory):
         for i in files:
             # print(i)
             f.write(i + '\n')
+
+list_gen('/home/jared/Documents/Python Projects/Hutterite-Bookshelf/Files/Abend & Morgen/')

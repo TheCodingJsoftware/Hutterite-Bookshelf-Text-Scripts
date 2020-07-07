@@ -1,4 +1,13 @@
+import os
 def extract_text(savelocation, file):
+    """Splits text into seperate files starting from 1. to the next 1.
+
+    Args:
+        savelocation (string): directory to where it should extract files to
+        file (string): file you want to extra files FROM
+    """
+    # If the save location doesn't exist, we create one.
+    if not os.path.exists(savelocation): os.makedirs(savelocation)
     # Open the File you want to orginze text from.
     with open(file, 'r', encoding='utf-8') as f:
         # read all the lines of the file this gives you a large list with each line.
