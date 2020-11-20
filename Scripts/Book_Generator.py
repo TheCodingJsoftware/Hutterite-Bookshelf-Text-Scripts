@@ -1,9 +1,11 @@
 # Import libraries
 from PIL import ImageFont, ImageDraw, Image
 
-# Declare needed variables
+# Declare constant variables
 TEXT_FILE = 'perils to Christain living - Finished.txt'
 TEXT_FILE_CONTENTS = None
+LINES_PER_PAGE = 26
+CHARACTERS_PER_LINE = 55
 
 FONT_SIZE = 20
 FONT = ImageFont.truetype('arial.ttf', FONT_SIZE)
@@ -13,13 +15,24 @@ MARGIN_SIZE = 40
 PAPER_SIZE = (11, 8.5) #INCHES
 PIXEL_SIZE = (int(PAPER_SIZE[0]*DPI), int(PAPER_SIZE[1]*DPI))
 
+# Declare global variables
+orginized_text_file_contents = []
+orginized_line = []
 # Read text file
-with open(TEXT_FILE, 'r', encoding='utf-8') as file: TEXT_FILE_CONTENTS = file.read()
-print(TEXT_FILE_CONTENTS)
+with open(TEXT_FILE, 'r', encoding='utf-8') as file: TEXT_FILE_CONTENTS = file.readlines()
 
-# How many lines of text do i have
-
-# How many lines fit into one page with margins 
+# Orginize text to fit on pages (start to end)
+for line_index, line_contents in enumerate(TEXT_FILE_CONTENTS):
+    words = line_contents.split(' ')
+    char_count = 0
+    for word_index, word_contents in enumerate(words):
+        for char_index, char_contents in enumerate(word_contents):
+            char_count += 1
+            orginized_line += word_contents + ' '
+            if char_count >= CHARACTERS_PER_LINE:
+                
+                print(word_contents)
+    
 
 # Put lines in order of pages
 
