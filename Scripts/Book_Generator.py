@@ -56,10 +56,21 @@ def add_margin(pil_img, top, right, bottom, left, color):
 with open(TEXT_FILE, 'r', encoding='utf-8') as file: TEXT_FILE_CONTENTS = file.read()
 
 # Orginize text to fit on pages (start to end)
+word_ahead_char_count = 0
 text = TEXT_FILE_CONTENTS.split(' ')
-for line_index, word in enumerate(text):
-    orginized_line += (word + ' ')
+for word_index, word in enumerate(text):
     char_count += len(word)
+    # if char_count >= CHARACTERS_PER_LINE:
+    #     try: word_ahead_char_count += char_count + len(text[word_index+1])
+    #     except IndexError: word_ahead_char_count = char_count
+    #     if word_ahead_char_count >= (CHARACTERS_PER_LINE + 10):
+    #         orginized_text_file_contents.append([orginized_line])
+    #         orginized_line = ''
+    #         char_count = 0
+    #     else:
+    #         orginized_line += (word + ' ')
+    # else:
+    orginized_line += (word + ' ')
     if char_count >= CHARACTERS_PER_LINE:
         orginized_text_file_contents.append([orginized_line])
         orginized_line = ''
@@ -67,7 +78,7 @@ for line_index, word in enumerate(text):
 
 # Put lines in order of pages
 page_text = []
-for line_index, line in enumerate(orginized_text_file_contents):
+for _, line in enumerate(orginized_text_file_contents):
     line_count += 1
     page_text.append(line)
     if line_count >= LINES_PER_PAGE:
@@ -122,7 +133,7 @@ for page_num in files_with_text:
     try:
         # print(page_layout_text[page_num])
 
-        text = [i[0] for i in page_layout_text[page_num]]
+        text = [i[0] for i in page_layout_text[page_num-1]]
         text = '\n'.join(text)
         img = Image.open(f"{IMAGES_LOCATION}{page_num}.png")
         d = ImageDraw.Draw(img)
