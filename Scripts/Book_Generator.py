@@ -1,8 +1,15 @@
 # Import libraries
+from docx.shared import Inches
+from docx import Document
 from PIL import ImageFont, ImageDraw, Image
-import shutil, os
+import shutil
+import os
 import numpy as np
 import cv2
+from natsort import natsort_keygen
+from docx.enum.section import WD_SECTION
+from docx.enum.section import WD_ORIENT
+natsort_key = natsort_keygen()
 # Declare constant variables
 TEXT_FILE = 'Scripts/output.txt'
 IMAGES_LOCATION = 'Scripts/Output/'
@@ -14,12 +21,12 @@ FONT_SIZE = 50
 FONT = ImageFont.truetype('arial.ttf', FONT_SIZE)
 
 DPI = 300
-TOP_MARGIN = 200
-BOTTOM_MARGIN = 200
-LEFT_MARGIN = 200
-RIGHT_MARGIN = 200
+TOP_MARGIN = int(0.75*DPI) # Inches
+BOTTOM_MARGIN = int(0.75*DPI) # Inches
+LEFT_MARGIN = int(0.75*DPI)  # Inches
+RIGHT_MARGIN = int(0.75*DPI) # Inches
 MARGIN_SIZE = (TOP_MARGIN, BOTTOM_MARGIN, LEFT_MARGIN, RIGHT_MARGIN)
-PAPER_SIZE = (11, 8.5) #INCHES
+PAPER_SIZE = (11, 8.5)  # INCHES
 PIXEL_SIZE = (int(PAPER_SIZE[0]*DPI), int(PAPER_SIZE[1]*DPI))
 COL_SIZE = ((PIXEL_SIZE[0]//2-(LEFT_MARGIN+RIGHT_MARGIN)),
             PIXEL_SIZE[1]-(TOP_MARGIN+BOTTOM_MARGIN))
@@ -37,10 +44,16 @@ def clear_folders(folders):
         for filename in os.listdir(folder):
             file_path = os.path.join(folder, filename)
             try:
-                if os.path.isfile(file_path) or os.path.islink(file_path): os.unlink(file_path)
-                elif os.path.isdir(file_path): shutil.rmtree(file_path)
-            except Exception as e: print('Failed to delete %s. Reason: %s' % (file_path, e))
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
 clear_folders([IMAGES_LOCATION])
+
 
 def add_margin(pil_img, top, right, bottom, left, color):
     width, height = pil_img.size
@@ -50,14 +63,17 @@ def add_margin(pil_img, top, right, bottom, left, color):
     result.paste(pil_img, (left, top))
     return result
 
+
 # Read text file
-with open(TEXT_FILE, 'r', encoding='utf-8') as file: TEXT_FILE_CONTENTS = file.read()
+with open(TEXT_FILE, 'r', encoding='utf-8') as file:
+    TEXT_FILE_CONTENTS = file.read()
 
 # Orginize text to fit on pages (start to end)
 word_ahead_char_count = 0
 lines = TEXT_FILE_CONTENTS.split('\n')
 text = []
-for line in lines: text += line.split(' ')
+for line in lines:
+    text += line.split(' ')
 for word_index, word in enumerate(text):
     if word == '':
         orginized_text_file_contents.append(['\n'])
@@ -96,8 +112,10 @@ flip_spots = True
 for i in range(NUM_OF_COLS):
     n = i + 1
     if not i >= (NUM_OF_COLS//2):
-        if flip_spots: ORDER_OF_PAGES.append([n, NUM_OF_COLS-i])
-        else: ORDER_OF_PAGES.append([NUM_OF_COLS-i, n])
+        if flip_spots:
+            ORDER_OF_PAGES.append([n, NUM_OF_COLS-i])
+        else:
+            ORDER_OF_PAGES.append([NUM_OF_COLS-i, n])
         flip_spots = not flip_spots
 print(ORDER_OF_PAGES)
 
@@ -137,9 +155,11 @@ for page_num in files_with_text:
         img = Image.open(f"{IMAGES_LOCATION}{page_num}.png")
         text_img = ImageDraw.Draw(img)
         text_img.text((0, 0), text, fill=(0, 0, 0), font=FONT)
-        img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN, BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+        img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
+                         BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
         img.save(f"{IMAGES_LOCATION}{page_num}.png", quality=95)
-    except Exception as e: print(e)
+    except Exception as e:
+        print(e)
 
 # Add page numbers in footer
 flip_spots = True
@@ -149,25 +169,43 @@ for page_order in ORDER_OF_PAGES:
         x, y = img.size
         page_num_img = ImageDraw.Draw(img)
         # Add margin
-        if flip_spots: 
+        if flip_spots:
             page_num_img.text((100, 100), str(page), fill=(0, 0, 0), font=FONT)
-        else: 
-            page_num_img.text((x-150, 100), str(page), fill=(0, 0, 0), font=FONT)
+        else:
+            page_num_img.text((x-150, 100), str(page),
+                              fill=(0, 0, 0), font=FONT)
         flip_spots = not flip_spots
         img.save(f"{IMAGES_LOCATION}{page}.png", quality=95)
 
 # Combine
-for page_order in ORDER_OF_PAGES:
-    
+for page_index, page_order in enumerate(ORDER_OF_PAGES):
     img1 = cv2.imread(f"{IMAGES_LOCATION}{page_order[0]}.png")
-
     img2 = cv2.imread(f"{IMAGES_LOCATION}{page_order[1]}.png")
-
-    # img2.paste(img1, (0, 0), img1)
-    # img2.save(f'{page_order[0]} - {page_order[1]}.png',"PNG")
     vis = np.concatenate((img1, img2), axis=1)
-    cv2.imwrite(f'{IMAGES_LOCATION}{page_order[0]} - {page_order[1]}.png', vis)
+    cv2.imwrite(f'{IMAGES_LOCATION}Page {page_index+1}; {page_order[0]} - {page_order[1]}.png', vis)
     os.remove(f"{IMAGES_LOCATION}{page_order[0]}.png")
     os.remove(f"{IMAGES_LOCATION}{page_order[1]}.png")
 
-# Save
+# Compile and Save
+def change_orientation(new_section):
+    current_section = document.sections[-1]
+    new_width, new_height = current_section.page_height, current_section.page_width
+    new_section.orientation = WD_ORIENT.LANDSCAPE
+    new_section.page_width = new_width
+    new_section.page_height = new_height
+
+    return new_section
+all_file_names = os.listdir(IMAGES_LOCATION)
+all_file_names.sort(key=natsort_key)
+document = Document()
+#changing the page margins
+sections = document.sections
+for section in sections:
+    change_orientation(section)
+    section.top_margin = Inches(0)
+    section.bottom_margin = Inches(0)
+    section.left_margin = Inches(0)
+    section.right_margin = Inches(0)
+for index, path in enumerate(all_file_names):
+    document.add_picture(IMAGES_LOCATION + path, width=Inches(PAPER_SIZE[0]-0.25))
+document.save('Scripts/Output/Compiled.docx')
