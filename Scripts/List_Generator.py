@@ -22,4 +22,4 @@ def list_gen(directory):
             # print(i)
             f.write(i + '\n')
 
-list_gen('/home/jared/Documents/Python Projects/Hutterite-Bookshelf/Files/Abend & Morgen/')
+# list_gen('/home/jared/Documents/Python Projects/Hutterite-Bookshelf/Files/Abend & Morgen/')
