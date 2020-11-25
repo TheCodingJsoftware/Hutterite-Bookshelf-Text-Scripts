@@ -8,7 +8,8 @@ from functools import partial
 import os, sys, threading, atexit
 import Auto_Correct_Text as correctText
 import Auto_Orginize_Text as orginizeText
-import Auto_Read_Page as readText
+import Book_Generator as generateBook
+# import Auto_Read_Page as readText
 import Auto_Sort_Text as sortText
 import List_Generator as listGen
 import time
@@ -61,9 +62,13 @@ class mainwindowUI(QMainWindow):
     def load_ui_objects(self):
         # checkboxes
         self.checkboxSortText = self.findChild(QCheckBox, 'checkBox')
+        self.checkboxSortText.setToolTip('Seperates sections into diffrent files, ranging\nfrom the letter 1 to the next 1 in a text fie')
         self.checkboxOrginizeText = self.findChild(QCheckBox, 'checkBox_2')
+        self.checkboxOrginizeText.setToolTip('Removes all empty spaces from a text file.\nAdds a new line BEFORE a number.')
         self.checkboxCorrectText = self.findChild(QCheckBox, 'checkBox_3')
+        self.checkboxCorrectText.setToolTip('Corrects the text from selected text file, using the\n"word_fixes.txt" file as corrections.')
         self.checkboxGenerateList = self.findChild(QCheckBox, 'checkBox_4')
+        self.checkboxGenerateList.setToolTip('Generate a list of a directory to be used in programming\nOnly generates:\nC#\n\nThis is handy if you have 100s of\nfiles you need a list for.')
 
         # lineedits
         self.lineeditDirectoryListGenerator = self.findChild(QLineEdit, 'lineEdit_4')
@@ -75,14 +80,17 @@ class mainwindowUI(QMainWindow):
         
         # buttons
         self.buttonStart = self.findChild(QPushButton, 'btnStart')
+        self.buttonStart.setToolTip('Start Image to Text converstion.')
         self.buttonStart.setEnabled(False)
         self.buttonStart.clicked.connect(self.btnstart)
 
         self.buttonSelectFiles = self.findChild(QPushButton, 'btnSelectFiles')
         self.buttonSelectFiles.clicked.connect(self.selectFiles)
+        self.buttonSelectFiles.setToolTip('Select images to read text from.')
         
         self.buttonClear = self.findChild(QPushButton, 'btnClear')
         self.buttonClear.clicked.connect(self.clearListWidget)
+        self.buttonClear.setToolTip('Clears all selected images.')
         
         # progressbar
         self.progressBar = self.findChild(QProgressBar, 'progressBar')
@@ -104,19 +112,18 @@ class mainwindowUI(QMainWindow):
             # self.lblState.setHidden(False)
             self.progressBar.setHidden(False)
             # self.lblState.setText(f"{text}")
-            if not text == 'Finished!':
-                if not text == '':
-                    currentNum = text.split(' - ')
-                    currentNum = currentNum[-1].split('/')
-                    
-                    currentNum = int(currentNum[0])
-                    
-                    maxnum = text.split('/')
-                    maxnum = int(maxnum[-1])
-                    # print(maxnum)
-                    
-                    self.progressBar.setValue(currentNum)
-                    self.progressBar.setMaximum(maxnum)
+            if text not in ['Finished!', '']:
+                currentNum = text.split(' - ')
+                currentNum = currentNum[-1].split('/')
+
+                currentNum = int(currentNum[0])
+
+                maxnum = text.split('/')
+                maxnum = int(maxnum[-1])
+                # print(maxnum)
+
+                self.progressBar.setValue(currentNum)
+                self.progressBar.setMaximum(maxnum)
             self.progressBar.setFormat(' ' + text)
             if text == '': 
                 # self.clearLayout(self.gridLayoutItems)
@@ -138,7 +145,7 @@ class mainwindowUI(QMainWindow):
                     self.progressBar.setFormat(f' Generating list for {temp_filename}....')
                     listGen.list_gen(fileLoc)
                 self.progressBar.setHidden(True)
-                
+
         except Exception as e:
             print(e)
     def selectFiles(self):
@@ -177,10 +184,9 @@ class mainwindowUI(QMainWindow):
         print(self.txtOutputFilename)
         self.start_conversion(self.image_paths, self.txtOutputFilename, 0)
     def keyPressEvent(self, event):
-        if type(event) == QtGui.QKeyEvent:
-            if event.key() == QtCore.Qt.Key_Delete:
-                # self.emit(QtCore.SIGNAL('MYSIGNAL'))
-                self.deleteSelected(self.last_clicked)
+        if type(event) == QtGui.QKeyEvent and event.key() == QtCore.Qt.Key_Delete:
+            # self.emit(QtCore.SIGNAL('MYSIGNAL'))
+            self.deleteSelected(self.last_clicked)
     def deleteSelected(self, index):
         index = index - 1
         self.image_paths.pop(index)
