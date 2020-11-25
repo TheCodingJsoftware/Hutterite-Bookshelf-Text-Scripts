@@ -98,7 +98,6 @@ def convert_text_to_image():
             orginized_text_file_contents.append([orginized_line])
             orginized_line = ''
             char_count = 0
-    print(orginized_text_file_contents[-3])
     # Put lines in order of pages
     page_text = []
     for _, line in enumerate(orginized_text_file_contents):
@@ -122,31 +121,19 @@ def convert_text_to_image():
     for i in range(NUM_OF_COLS):
         n = i + 1
         if not i >= (NUM_OF_COLS//2):
-            if flip_spots:
-                ORDER_OF_PAGES.append([n, NUM_OF_COLS-i])
-            else:
-                ORDER_OF_PAGES.append([NUM_OF_COLS-i, n])
+            ORDER_OF_PAGES.append([n if flip_spots else NUM_OF_COLS-i, NUM_OF_COLS-i if flip_spots else n])
             flip_spots = not flip_spots
 
     # Create blank image
     file_names = []
     for i in ORDER_OF_PAGES:
-        for j in i:
-            file_names.append(j)
+        for j in i: file_names.append(j)
 
-    for page_num in file_names:
-        # print(ORDER_OF_PAGES[(len(ORDER_OF_PAGES)-1) - page_num])
+    for page_name in file_names:
         img = Image.new("RGB", COL_SIZE, (255, 255, 255))
-        img.save(f"{IMAGES_LOCATION}{page_num}.png", "PNG")
+        img.save(f"{IMAGES_LOCATION}{page_name}.png", "PNG")
 
     # Add text to image.
-    files_with_text = file_names
-    files_with_text.pop(0)
-    files_with_text.pop(0)
-    files_with_text.sort()
-    print('length of pages', len(page_layout_text))
-    # ! THIS NEEDS OT BE FIXED IT DOESNT WORK IF ITS ODD NUMBER OF COLS IT DOESNT OUTPUT THAT
-
     all_file_names = os.listdir(IMAGES_LOCATION)
     all_file_names.sort(key=NATSORT_KEY)
     all_file_names.pop(-1)
@@ -160,21 +147,17 @@ def convert_text_to_image():
             text = '\n'.join(text)
             text_img = ImageDraw.Draw(img)
             text_img.text((0, 0), text, fill=(0, 0, 0), font=FONT)
-            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
-                            BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN, BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
             img.save(f"{IMAGES_LOCATION}{page_number}.png", quality=95)
         except IndexError:
             print(f'Page #{page_number} is empty.')
             img = Image.open(f"{IMAGES_LOCATION}{page_number}.png")
-            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
-                            BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN, BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
             img.save(f"{IMAGES_LOCATION}{page_number}.png", quality=95)
     for page_name in ['BACK', 'FRONT']:
         img = Image.open(f"{IMAGES_LOCATION}{page_name}.png")
-        img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
-                        BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+        img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN, BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
         img.save(f"{IMAGES_LOCATION}{page_name}.png", quality=95)
-
 
     # Add page numbers in header
     if INCLUDE_PAGE_NUMBERS:
