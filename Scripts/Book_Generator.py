@@ -87,16 +87,18 @@ def convert_text_to_image():
         text += line.split(' ')
     for _, word in enumerate(text):
         if word == '':
+            orginized_text_file_contents.append([orginized_line])
             orginized_text_file_contents.append(['\n'])
             orginized_line = ''
             char_count = 0
+            # continue
         char_count += len(word)
         orginized_line += (word + ' ')
         if char_count >= CHARACTERS_PER_LINE:
             orginized_text_file_contents.append([orginized_line])
             orginized_line = ''
             char_count = 0
-
+    print(orginized_text_file_contents[-3])
     # Put lines in order of pages
     page_text = []
     for _, line in enumerate(orginized_text_file_contents):
@@ -109,9 +111,9 @@ def convert_text_to_image():
     page_text.clear()
 
     # How many coloumns are there
-    NUM_OF_COLS = (len(page_layout_text))
     for i in orginized_text_file_contents[(len(page_layout_text)*LINES_PER_PAGE):]: page_text.append(i)
     page_layout_text.append(page_text)
+    NUM_OF_COLS = (len(page_layout_text))
     if NUM_OF_COLS % 2 != 0: NUM_OF_COLS += 1
 
     # Figure out order of pages
@@ -125,13 +127,13 @@ def convert_text_to_image():
             else:
                 ORDER_OF_PAGES.append([NUM_OF_COLS-i, n])
             flip_spots = not flip_spots
-            
+
     # Create blank image
     file_names = []
     for i in ORDER_OF_PAGES:
         for j in i:
             file_names.append(j)
-            
+
     for page_num in file_names:
         # print(ORDER_OF_PAGES[(len(ORDER_OF_PAGES)-1) - page_num])
         img = Image.new("RGB", COL_SIZE, (255, 255, 255))
@@ -144,12 +146,18 @@ def convert_text_to_image():
     files_with_text.sort()
     print('length of pages', len(page_layout_text))
     # ! THIS NEEDS OT BE FIXED IT DOESNT WORK IF ITS ODD NUMBER OF COLS IT DOESNT OUTPUT THAT
-    for page_number in range(len(page_layout_text)):
+
+    all_file_names = os.listdir(IMAGES_LOCATION)
+    all_file_names.sort(key=NATSORT_KEY)
+    all_file_names.pop(-1)
+    all_file_names.pop(-1)
+    for page_number in all_file_names:
+        page_number = int(page_number.replace('.png',''))
         try:
             if page_number == 0: continue
             img = Image.open(f"{IMAGES_LOCATION}{page_number}.png")
-            text = [i[0] for i in page_layout_text[page_number]]
-            print('Page Number: ', page_number, 'Line Lengths:', len(page_layout_text[page_number]))
+            text = [i[0] for i in page_layout_text[page_number-1]]
+            print('Page Number: ', page_number, 'Line Lengths:', len(page_layout_text[page_number-1]))
             text = '\n'.join(text)
             text_img = ImageDraw.Draw(img)
             text_img.text((0, 0), text, fill=(0, 0, 0), font=FONT)
@@ -191,8 +199,15 @@ def convert_text_to_image():
     for page_index, page_order in enumerate(ORDER_OF_PAGES):
         img1 = cv2.imread(f"{IMAGES_LOCATION}{page_order[0]}.png")
         img2 = cv2.imread(f"{IMAGES_LOCATION}{page_order[1]}.png")
-        # vis = np.concatenate((img1, img2), axis=1)
-        vis = cv2.hconcat([img1, img2])
+        try:
+            vis = np.concatenate((img1, img2), axis=1)
+        except:
+            img = Image.open(f"{IMAGES_LOCATION}{page_order[1]}.png")
+            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
+                            BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+            img.save(f"{IMAGES_LOCATION}{page_order[1]}.png", quality=95)
+            vis = np.concatenate((img1, img), axis=1)
+        # vis = cv2.hconcat([img1, img2])
         cv2.imwrite(f'{IMAGES_LOCATION}Page {page_index+1}; {page_order[0]} - {page_order[1]}.png', vis)
         if page_index == 0:
             img = Image.open(f'{IMAGES_LOCATION}Page {page_index+1}; {page_order[0]} - {page_order[1]}.png')
@@ -208,7 +223,7 @@ def convert_image_to_document():
     all_file_names = os.listdir(IMAGES_LOCATION)
     all_file_names.sort(key=NATSORT_KEY)
     document = Document()
-    
+
     #changing the page margins
     sections = document.sections
     for section in sections:
