@@ -157,15 +157,18 @@ def convert_text_to_image():
             if page_number == 0: continue
             img = Image.open(f"{IMAGES_LOCATION}{page_number}.png")
             text = [i[0] for i in page_layout_text[page_number-1]]
-            print('Page Number: ', page_number, 'Line Lengths:', len(page_layout_text[page_number-1]))
             text = '\n'.join(text)
             text_img = ImageDraw.Draw(img)
             text_img.text((0, 0), text, fill=(0, 0, 0), font=FONT)
             img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
                             BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
             img.save(f"{IMAGES_LOCATION}{page_number}.png", quality=95)
-        except Exception as e:
-            print(e)
+        except IndexError:
+            print(f'Page #{page_number} is empty.')
+            img = Image.open(f"{IMAGES_LOCATION}{page_number}.png")
+            img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
+                            BOTTOM_MARGIN, LEFT_MARGIN, (255, 255, 255))
+            img.save(f"{IMAGES_LOCATION}{page_number}.png", quality=95)
     for page_name in ['BACK', 'FRONT']:
         img = Image.open(f"{IMAGES_LOCATION}{page_name}.png")
         img = add_margin(img, TOP_MARGIN, RIGHT_MARGIN,
