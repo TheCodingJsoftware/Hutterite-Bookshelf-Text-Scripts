@@ -43,7 +43,7 @@ This software is still in development. It is usable. **BUT** it can only run fro
 ## Installation
 As mentioned above, this software has no offcial build, so below are the instructions to run the code from source.
 
-1. Setup your virtual envirotment.
+1. Setup your virtual enviroment.
 
 *You may need to install `virtualenv` with:*
 
