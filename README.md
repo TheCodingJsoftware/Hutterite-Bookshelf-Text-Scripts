@@ -27,23 +27,28 @@ the [Scripts folder](https://github.com/JareBear12418/Hutterite-Bookshelf/tree/m
 - [Auto_Read_Page.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/Auto_Read_Page.py)
   - This script is deprecated and was only used for testing.
 - [Auto_Sort_Text.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/Auto_Sort_Text.py)
-  - This script splits up the `output.txt` file into smaller files starting from the letter `1.` going till the next `1.`. This is used to organize all the songs into it's own file.
+  - This script splits up the `output.txt` file into smaller files starting from the letter `1.` going till the next `1.`. This is used to organize all the songs into it's own text file.
 - [Book_Generator.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/Book_Generator.py)
-  - This was not used in the development in the Hutterite Bookshelf, but merely just added to this repository so you can convert stories into Foldable books. It uses a text file, that fits that text into spesfic images, and then into a Word Document to print it.
+  - This was not used in the development in the Hutterite Bookshelf, but merely just added to this repository so you can convert stories into Foldable books. It uses a text file that fits that text into spesfic images, and then into a Word Document to print it.
 - [GUI.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/GUI.py)
   - This is the graphical User Interface. It supports all the scripts except [Book_Generator.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/Book_Generator.py). It provides an easy to use interface that makes it easy to convert your images to text, you can also choose to use any of the above scripts after text has been generated.
 - [List_Generator.py](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/List_Generator.py)
   - Another script that doesn't have much to do with text processing, but more or less make development of the app easier, this was used to generate LARGE lists for all of the songs in the app.
 - [word_fixes.txt](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/Scripts/word_fixes.txt)
-  - Like mentioned above, this file contains alot of word fixes that the [ConvertThread](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/8809bacf1f42eb0e3d9ed8f0064f4cd17544e74d/Scripts/GUI.py#L22) because because image to text is not 100% accurate, and needs a bit of correcting. **NOTE** These are not ALL of the word fixes that can occur, these are just words that I found while manually going threw all the songs and fixed by hand. I made a list of as many as I could so I would not have to do this process again, because it was horrible! :) 
+  - Like mentioned above, this file contains alot of word fixes that the [ConvertThread](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/8809bacf1f42eb0e3d9ed8f0064f4cd17544e74d/Scripts/GUI.py#L22) causes because because image to text is not 100% accurate, and needs a bit of 'correcting'. **NOTE** These are not ALL of the word fixes that can occur, these are just words that I found while manually going threw all the songs and fixed by hand. I made a list of as many as I could so I would not have to do this process again, because it was horrible! :) 
 
 ## Build
 This software is still in development. It is usable. **BUT** it can only run from source at the moment, as I have not made a compiled version for this software, and do not intend to anytime soon. [Instructions to install.](https://github.com/JareBear12418/Hutterite-Bookshelf#installation) 
 
 ## Installation
-As mentioned above, this software has no offical build, so here are the instructions to run the code from source.
+As mentioned above, this software has no offcial build, so below are the instructions to run the code from source.
 
-1. Create a virtual enviroment.
+1. Setup your virtual envirotment.
+
+*You may need to install `virtualenv` with:
+```pip install virtualenv```
+
+Create a virtual enviroment.
 
 ```virtualenv [name]```
 
@@ -59,7 +64,7 @@ As mentioned above, this software has no offical build, so here are the instruct
 
 ```python GUI.py```
 
-I can't guarentee that everything installed correctly, or if these are all the requirements, they tend to change, and sometimes need other requirments. You may contact me if any problems occur, or open an issue.
+I can't guarentee that everything installed correctly, or if these are all the requirements, they tend to change, and sometimes need other requirments. You may contact me if any problems occur, or open an issue on this repository.
 
 ## Request a Custom book arrangment
 If you want to a request a special arrangment of songs unique to either you or your community, please provide the following:
@@ -95,20 +100,20 @@ Why don't you do this threw the cloud?
 ### How long did it take to develop the Hutterite Bookshelf?
 - Started development on March 4, 2020. Since then and some gaps between I've been working almost fully on the app. I'm always trying to make it more unique and stand out to the other competitor apps. I can't give an exact time frame on how many hours I've spent coding and designing this app. Roughly around 6 months of developing, around 4-6 hours each day which is approximately 1000+ hours. 
 
-### Why did you make 'another' Bookshelf app if there are already good ones?
-- Complicated question, I was dissatisfied with both [Bookshelf](https://play.google.com/store/apps/details?id=com.cedrontech.adb) and [IchSing](https://play.google.com/store/apps/details?id=io.cs.ichsing). Don't get me wrong, they are great apps. But they lack features that I think a digital song book should have, and features that I personaly wanted. 
-  - One small issue I had was, the lack of **dark theme**. Silly as it may seem, but this is true. Being a developer and spending lots of my day staring a screen is hard on the eyes, So naturally I want to have a dark theme for everything I use. I payed extra attention to detail when designing dark theme for this app, simply because it's something any new application should include. I am aware that IchSing does provide dark theme.
+### Why did you make 'another' song app if there are already good ones?
+- Complicated question, I was dissatisfied with both [Bookshelf](https://play.google.com/store/apps/details?id=com.cedrontech.adb) and [IchSing](https://play.google.com/store/apps/details?id=io.cs.ichsing). Don't get me wrong, they are fantastic apps and the developers did a wonderful job. But they lack features that I think a digital song book should have, and features that I personaly wanted. 
+  - One big issue I had was, the lack of **dark theme**. Silly as it may seem, but this is true. Being a developer and spending lots of my day staring a screen is hard on the eyes, So naturally I want to have a dark theme for everything I use. I payed extra attention to detail when designing dark theme for this app, simply because it's something any new application should include. I am aware that [IchSing](https://play.google.com/store/apps/details?id=io.cs.ichsing) does provide dark theme.
   - Another feature that the other song book apps don't deliver as well is searching, while IchSing has great searching, but the original Bookshelf does not. I still have alot of work to do with our search engine in the Hutterite Bookshelf app to match that of IchSing. 
-  - From a design aspect, both apps look really similar, mainly because they were developed in Kotlin, and/or Java using Android Studio. The Hutterite Bookshelf was made using a Game Engine and written in C# which is basicly C's younger brother, being from same family of programming languages, but C# has been more modernized. Is that better? No. But this gives me ALOT more control on the most important aspect of an app. The User Experience and User Interface. I'm not limited by the tools Android gives you with their native UI elements. I designed my own UI from the ground up, giving it a more relaxing/refresing and new look.
+  - From a design aspect, both apps look really similar, mainly because they were developed in Kotlin, and/or Java using Android Studio. The Hutterite Bookshelf was made using a Game Engine and written in C# programming language which is basicly C's younger brother, being from same family of programming languages. C# has been more modernized by microsoft. Is a game engine better? No. But this gives me ALOT more control on the most important aspect of an app. The User Experience and User Interface. I'm not limited by the tools Android gives you with their native UI elements. I designed my own UI from the ground up, giving it a more relaxing/refresing and new look.
   - The lack of customizability in both apps for me personaly is a no no. 
-  - One final issue that really dissapointed me from both apps, is the bookmark system, both of them have no bookmarking. Being able to bookmark a song, and returning right where you left off, is a necessity in for any digital book app. This feature is one that both apps do not have.
-- This may seem like just a rant about me complaining about the apps. But it's not. Im comparing differences. I took things I didn't like about either app and tried my best to make my own version of how I think a song book app should be.
+  - One final issue that really dissapointed me from both apps, is the bookmark system, both of them have no bookmarking. Being able to bookmark a song, and returning right where you left off, is a necessity for any digital book app. This feature is one that both apps do not have.
+- This may seem like just a rant about me complaining about the apps. But it's not. Im comparing differences from my perspective (which may seem like a rant). I took things I didn't like about either app and tried my best to make my own version of how I think a song book app should be.
 
 ### Will you be adding playbacks for each song? 
 - Short answer.
   - No.
 - Reason
-  - This is where IchSing is way better, because it is probably more community driven *(this is just a guess)*. The Hutterite Bookshelf was developed by only one person (me), in my own time as a hobby. Other support such as testing and constructive criticism was provided by my family. I don't have tools/equipment/time/resources/voice to sing every song and record it. The app is optimized and setup for such a feature, but until I am capable of singing and recording all the songs to superb quality, this sadly won't be added anytime soon.
+  - This is where [IchSing](https://play.google.com/store/apps/details?id=io.cs.ichsing) is way better, because it is probably more community driven *(this is just a guess)*. The Hutterite Bookshelf was developed by only one person (me), in my own time as a hobby. Other support such as testing and constructive criticism was provided by my family. I don't have tools/equipment/time/resources/voice to sing every song and record it. The app is optimized and setup for such a feature, but until I am capable of singing and recording all the songs to superb quality, this sadly won't be added anytime soon.
 
 ### Will you be adding more books?
 - Short answer.
@@ -121,7 +126,7 @@ Why don't you do this threw the cloud?
 - Yes! Once the app is in a stable version, Support will be added for Windows and soon IOS!
     
 ### Why is the app so big in size?
-- Due to the nature of being built in a Game Engine it makes it harder to optimize the size of the app. We are working very hard and are making headways to get the app under 15mb. Alot of the size is the Game Engines code itself. Because it does not use Android's native support.
+- Due to the nature of being built in a Game Engine it makes it harder to optimize the size of the app. We are working very hard and are making headways to get the app under 15mb. Alot of the size is the game engines code itself. Because it does not use Android's native support.
 
 ### Why is the app laggy when viewing long songs?
 - Simple answer:
@@ -147,10 +152,10 @@ Why don't you do this threw the cloud?
 Contact me either by Opening an issue on this repository, or emailing me at jaredgrozz@gmail.com.
 
 ## Technical Information for nerds
-- The app is developed in the Unity game engine, version [2018.3.0f2](https://unity3d.com/get-unity/download/archive) using the C-Sharp (C#) programming language.  Why I chose a game engine to develop this app is mentioned [here](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/README.md#why-did-you-make-another-bookshelf-app-if-there-are-already-good-ones).
+- The app is developed in the Unity game engine, version [2018.3.0f2](https://unity3d.com/get-unity/download/archive) using the C-Sharp (C#) programming language.  Why I chose a game engine to develop this app is mentioned [here](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/README.md#why-did-you-make-another-song-app-if-there-are-already-good-ones).
     - The version 2018 seems kinda 'old' and you would be right. This is an old version of Unity, it's also the most stable version that **I** (personally) found for mobile development. Don't newer version offer more better features? YES! But they have no benefit for me in terms of developing this app. and upgrading isn't just as simple as installing a newer version and having everything work flawlessly. There would be benefits to update, but for now and the time being I won't be updating.
-- I want to emphasize why I didn't switch the engine, or language aside from the design style I wanted, and more on development.
-    - Having used the Unity Engine for well over 3 years, I was super comfortable using it for any application, not to mention unity supports ALL platforms from IOS to XBox to PS4 and even for the Web. So right off the bet, I could develop the app and distribute to EVERY single platform. I use Python for all of my professional projects. Speaking of python, I was mere moments away from building the app in Python. Here's why I didn't. there is little to no support for android or any mobile support for Python applications, those that exist, are super 'hacky' and at most unreliable, and a whole nother learning curve to use. Alot of the Android Dev tools don't offer the features I wanted to have in my app, lets not forget I said 'Android' dev tools, meaning not: "IOS" or "Windows" or "Web". I wanted this app to look the same on all platforms, and work for all platforms. I wanted to build the app being comfortable that I can distribute it to which ever platform I need to build it for. Unity being perfect for that. 
+- I want to emphasize why I didn't switch the engine, or language aside from the design style I wanted, and focus more on development side of things.
+    - Having used the Unity Engine for well over 3 years, I was super comfortable using it for any application, not to mention unity supports ALL platforms from IOS to XBox to PS4 and even for the Web. So right off the bet, I could develop the app and distribute to EVERY single platform. I use Python for all of my professional projects. Speaking of python, I was mere moments away from building the app in Python. Here's why I didn't. there is little to no support for android or any mobile support for Python applications, those that exist, are super 'hacky' and at most unreliable, not to mention a whole nother learning curve to learn how use them properly. Alot of the Android Dev tools don't offer the features I wanted to have in my app, lets not forget I said 'Android' dev tools, meaning not: "IOS" or "Windows" or "Web". I wanted this app to look the same on all platforms, and work for all platforms. I wanted to build the app being comfortable that I can distribute it to which ever platform I need to build it for. Unity being perfect for that. 
     - Deciding what I should build this app in may seem like an obviuos and simple question to answere, it's not. I spent weeks if not a month testing different ideas/software/tools, I always came back to Unity. The offcial date I started developing the app in Unity was March 4, 2020.
 - I used [Visual Studio Code](https://code.visualstudio.com) code editor for writing every single line of code.
 - The app alone (not including the engine) contains well over 20,000 lines of code, and more being added every single update.
