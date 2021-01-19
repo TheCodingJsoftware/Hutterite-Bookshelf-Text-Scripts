@@ -45,7 +45,8 @@ As mentioned above, this software has no offcial build, so below are the instruc
 
 1. Setup your virtual envirotment.
 
-*You may need to install `virtualenv` with:
+*You may need to install `virtualenv` with:*
+
 ```pip install virtualenv```
 
 Create a virtual enviroment.
