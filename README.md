@@ -1,4 +1,7 @@
 <p align="center">
+    <img height="200" src="https://play-lh.googleusercontent.com/sn-6sMMj7s0YzyopOFsT8Vbx6lv4BmKBuEWd96f4hhUEeTWzFblRFsZ0K1_gzd55dA=w330-h160-rw" />
+</p>
+<p align="center">
     <a href="https://img.shields.io/github/license/JareBear12418/Hutterite-Bookshelf?color=blue&style=for-the-badge" alt="License">
         <img src="https://img.shields.io/github/license/JareBear12418/Hutterite-Bookshelf?color=blue&style=for-the-badge" /></a>
     <a href="https://img.shields.io/github/repo-size/JareBear12418/Hutterite-Bookshelf?label=Size&style=for-the-badge" alt="Size">
@@ -139,6 +142,9 @@ Why don't you do this threw the cloud?
   - Why did we stick with the Game Engine if the primary feature is to look at text?
     - Let's back up a bit to when I started developing the app. This was the first feature I tested, and the first problem I encountered. **This isn't an issue with 97% of the songs.** We are still working on a concrete way to optimize text rendering for these large text files. This is just an issue that I have to work around and just live with.
 
+### Why do updates take so long?
+- I am a solo developer and doing everything from data collection, to art, UX, coding, design, development of third party tools, etc. Doing all these things takes time, and testing the app after every feature takes a long time. I want to ensure that the update won't be a buggy mess and will function smoothly and I don't want to have to upload a quick hot fix for that issue.
+
 ### Why does the app need permission for my Mic and Device storage?
 - Mic.
   - In order to use the built in recording feature that you can enable as you please to record what your singing, the app needs permission to use your mic. 
@@ -154,7 +160,7 @@ Contact me either by Opening an issue on this repository, or emailing me at jare
 
 ## Technical Information for nerds
 - The app is developed in the Unity game engine, version [2018.3.0f2](https://unity3d.com/get-unity/download/archive) using the C-Sharp (C#) programming language.  Why I chose a game engine to develop this app is mentioned [here](https://github.com/JareBear12418/Hutterite-Bookshelf/blob/master/README.md#why-did-you-make-another-song-app-if-there-are-already-good-ones).
-    - The version 2018 seems kinda 'old' and you would be right. This is an old version of Unity, it's also the most stable version that **I** (personally) found for mobile development. Don't newer version offer more better features? YES! But they have no benefit for me in terms of developing this app. and upgrading isn't just as simple as installing a newer version and having everything work flawlessly. There would be benefits to update, but for now and the time being I won't be updating.
+    - The version 2018 seems kinda 'old' and you would be right. This is an old version of Unity, it's also the most stable version that **I** *(personally)* found for mobile development. Don't newer version offer more better features? YES! But they have no benefit for me in terms of developing this app. and upgrading isn't just as simple as installing a newer version and having everything work flawlessly. There would be benefits to update, but for now and the time being I won't be updating.
 - I want to emphasize why I didn't switch the engine, or language aside from the design style I wanted, and focus more on development side of things.
     - Having used the Unity Engine for well over 3 years, I was super comfortable using it for any application, not to mention unity supports ALL platforms from IOS to XBox to PS4 and even for the Web. So right off the bet, I could develop the app and distribute to EVERY single platform. I use Python for all of my professional projects. Speaking of python, I was mere moments away from building the app in Python. Here's why I didn't. there is little to no support for android or any mobile support for Python applications, those that exist, are super 'hacky' and at most unreliable, not to mention a whole nother learning curve to learn how use them properly. Alot of the Android Dev tools don't offer the features I wanted to have in my app, lets not forget I said 'Android' dev tools, meaning not: "IOS" or "Windows" or "Web". I wanted this app to look the same on all platforms, and work for all platforms. I wanted to build the app being comfortable that I can distribute it to which ever platform I need to build it for. Unity being perfect for that. 
     - Deciding what I should build this app in may seem like an obviuos and simple question to answere, it's not. I spent weeks if not a month testing different ideas/software/tools, I always came back to Unity. The offcial date I started developing the app in Unity was March 4, 2020.
