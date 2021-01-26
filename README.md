@@ -83,15 +83,15 @@ If you want to a request a special arrangment of songs unique to either you or y
     - If you choose to not provide an Icon, the default icon for books will be used. 
 5. Any other information you feel is important to include about your request.
 
-**NOTE**
+**NOTICE**
 Your request will **NOT** be fulfilled over night or the next day, or possibly even the next week. 
 This is a free service and is achieved in my own time, so please be reasonable and patient. They take lots of time and testing to complete.
 
-Your request is added **via an update** so if I reply back saying your request is completed and ready to be used. **Make sure you update to the latest version** 
+Your request is added **via an update** so if I reply back saying your request is completed and ready to be used, that doesn't mean it's magicly added to the app. **Make sure you update to the latest version to use your requested book!** 
 
 If you are not pleased by the code/name/icon/song arrangment then please contact me the code that is used for that book, and your requested changes. **The changes will be added via the next update.**
 
-Why don't you do this threw the cloud?
+Why don't you do this threw the cloud and do this threw updates?
 - I hate dealing with the cloud, it adds unnecessary complexity.
 - Due to how some community networks are set up, by blocking alot of website and services, it could provide a further problems to your network admin.
 
