@@ -96,10 +96,6 @@ Why don't you do this threw the cloud and do this threw updates?
 - Due to how some community networks are set up, by blocking alot of website and services, it could provide a further problems to your network admin.
 
 ## FAQ
-### Why did you provide all these songs for free?
-- These songs are the exact versions found in all of the Hutterite Books, Please note, I do not own any of these songs. I am just providing them for anyone to use if they want to make an app similar to mine, Or use small songs to print small booklets for certain events. 
-- Going about why I provide these songs for free, again, I don't own ownership to these songs. I do have physical copies of song books that were used to get the text for all of these. Which leads me to my next point.
-- Getting text from images is a super tedious process, and no one should really edit 3000 songs by hand (It's crazy). I don't want anyone to repeat the same process like I did, as it really makes no sense to do so. If you just want to have 'ownership' to songs that you got yourself, it really doesn't matter. These songs are provided freely for anyone and everyone to use openly, so you don't have to get them your own way, unless you want to go threw months of painful editing.
 
 ### How long did it take to develop the Hutterite Bookshelf?
 - Started development on March 4, 2020. Since then and some gaps between I've been working almost fully on the app. I'm always trying to make it more unique and stand out to the other competitor apps. I can't give an exact time frame on how many hours I've spent coding and designing this app. Roughly around 6 months of developing, around 4-6 hours each day which is approximately 1000+ hours. 
